@@ -8,22 +8,18 @@ import { Component, Input, OnInit } from "@angular/core";
 export class WeatherDetails implements OnInit {
 	@Input() weatherData: data[];
 	filteredCity: data;
-	case: boolean;
-	ngOnInit() {
-		this.case = false;
-	}
+	isCityFound: boolean = false;
+	searchedInput: string = "";
+
+	ngOnInit() {}
 
 	filterCity(value) {
-		if (value.length == 0) {
-			this.case = false;
-		} else {
-			this.case = true;
-		}
+		this.isCityFound = false;
 		const filteredData = this.weatherData.filter((city) => value.toLowerCase() == city.name.toLocaleLowerCase());
-		if (filteredData) {
+		if (filteredData.length > 0) {
+			this.isCityFound = true;
 			this.filteredCity = filteredData[0];
 		}
-		console.log(this.filteredCity);
 	}
 }
 

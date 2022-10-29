@@ -2,14 +2,14 @@
 
   <section class="layout-row align-items-center justify-content-center">
     <label>Enter City: </label>
-    <input type="text" class="large ml-30" placeholder="Seattle" (input)="filterCity($event.target.value)"
-      data-test-id="app-input" />
+    <input type="text" class="large ml-30" placeholder="Seattle" [(ngModel)]="searchedInput"
+      (input)="filterCity($event.target.value)" data-test-id="app-input" />
   </section>
 
   <section class="mt-20 layout-row align-items-center justify-content-center">
     <div class="card outlined">
       <div data-test-id="weather-details" class="card-text pt-10 layout-row justify-content-between"
-        *ngIf="filteredCity">
+        *ngIf="searchedInput.length>0 && isCityFound">
         <div class="mt-20 outlined">
           <button class="icon-only mx-2">
             <i class="material-icons">wb_sunny</i>
@@ -25,7 +25,8 @@
           </div>
         </div>
       </div>
-      <div data-test-id="no-results" class="card-text" *ngIf="!filteredCity && case">No result</div>
+      <div data-test-id="no-results" class="card-text" *ngIf="searchedInput.length>0 && !isCityFound">No Results Found
+      </div>
     </div>
   </section>
 </div>
